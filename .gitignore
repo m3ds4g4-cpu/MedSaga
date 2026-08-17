@@ -11,13 +11,11 @@ expo-env.d.ts
 
 # Credentials and signing
 credentials.json
-android/keystores/
 ios/certs/
 
 # Native
 .kotlin/
 *.orig.*
-*.jks
 *.p8
 *.p12
 *.key
