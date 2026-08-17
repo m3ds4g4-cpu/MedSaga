@@ -11,8 +11,8 @@ interface GenderSelectionProps {
 }
 
 export default function GenderSelection({ onSelectGender, onBack }: GenderSelectionProps) {
-  const colorScheme = useColorScheme() ?? 'light';
-  const colors = Colors[colorScheme];
+  const colorScheme = useColorScheme();
+  const colors = Colors[colorScheme === 'dark' ? 'dark' : 'light'];
   const [selectedGender, setSelectedGender] = useState<'male' | 'female' | null>(null);
 
   const handleContinue = () => {
@@ -129,7 +129,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     width: '100%',
   },
-  backButton: {\n    position: 'absolute',
+  backButton: {
+    position: 'absolute',
     top: 40,
     left: 16,
     paddingVertical: 12,

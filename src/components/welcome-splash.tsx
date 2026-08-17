@@ -11,8 +11,8 @@ interface WelcomeSplashProps {
 }
 
 export default function WelcomeSplash({ onContinue }: WelcomeSplashProps) {
-  const colorScheme = useColorScheme() ?? 'light';
-  const colors = Colors[colorScheme];
+  const colorScheme = useColorScheme();
+  const colors = Colors[colorScheme === 'dark' ? 'dark' : 'light'];
   const [showContent, setShowContent] = useState(false);
   const soundRef = useRef<any>(null);
   

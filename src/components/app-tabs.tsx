@@ -5,7 +5,7 @@ import { Colors } from '@/constants/theme';
 
 export default function AppTabs() {
   const scheme = useColorScheme();
-  const colors = Colors[scheme === 'unspecified' ? 'light' : scheme];
+  const colors = Colors[scheme === 'dark' ? 'dark' : 'light'];
 
   return (
     <Tabs
@@ -21,20 +21,20 @@ export default function AppTabs() {
         name="index"
         options={{
           title: 'Home',
-          tabBarIcon: ({ color }) => <Icon name="home" color={color} />,
+          tabBarIcon: ({ color }) => <Icon name="home" color={String(color)} />,
         }}
       />
       <Tabs.Screen
         name="explore"
         options={{
           title: 'Explore',
-          tabBarIcon: ({ color }) => <Icon name="compass" color={color} />,
+          tabBarIcon: ({ color }) => <Icon name="compass" color={String(color)} />,
         }}
       />
     </Tabs>
   );
 }
 
-function Icon({ name, color }: { name: string; color: string }) {
+function Icon({ name, color }: { name: string; color?: string }) {
   return null; // Basic placeholder
 }

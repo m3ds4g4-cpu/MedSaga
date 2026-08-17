@@ -11,8 +11,8 @@ interface MainMenuProps {
 const pharmacyBackground = require('@/assets/images/homescreen.png');
 
 export default function MainMenu({ selectedGender, onNewGame, onLoadGame, onBack }: MainMenuProps) {
-  const colorScheme = useColorScheme() ?? 'light';
-  const colors = Colors[colorScheme];
+  const colorScheme = useColorScheme();
+  const colors = Colors[colorScheme === 'dark' ? 'dark' : 'light'];
 
   return (
     <View style={styles.container}>
