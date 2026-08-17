@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MedSaga - Home Screen Preview</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #000;
+        }
+
+        .mobile-frame {
+            width: 1024px;
+            height: 576px;
+            margin: 20px auto;
+            border: 12px solid #333;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8);
+            position: relative;
+        }
+
+        .mobile-frame::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 20px;
+            background: #333;
+            border-radius: 0 0 20px 20px;
+            z-index: 10;
+        }
+
+        .screen {
+            width: 100%;
+            height: 100%;
+            background-image: url('assets/images/homescreen.png');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 18px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .info {
+            color: #999;
+            text-align: center;
+            margin-top: 40px;
+            font-size: 14px;
+        }
+
+        .info p {
+            margin: 10px 0;
+        }
+
+        h1 {
+            text-align: center;
+            color: #fff;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>MedSaga - Gaming App Preview</h1>
+    
+    <div class="mobile-frame">
+        <div class="screen">
+            <div style="text-align: center;">
+                <p>🎮 MedSaga Gaming App</p>
+                <p style="font-size: 14px; margin-top: 10px; opacity: 0.8;">Loading...</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="info">
+        <p><strong>App Status:</strong> Offline Mobile Gaming App</p>
+        <p><strong>Current Screen:</strong> Home Screen - MedSaga Background</p>
+        <p><strong>Orientation:</strong> Landscape (Always)</p>
+        <p><strong>Tech Stack:</strong> React Native + Expo</p>
+        <p>To run the app: <code>npm run web</code> or <code>npm start</code></p>
+    </div>
+</body>
+</html>
