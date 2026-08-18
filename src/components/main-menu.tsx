@@ -1,5 +1,4 @@
 import { StyleSheet, View, Text, Pressable, useColorScheme, ImageBackground } from 'react-native';
-import { Colors } from '@/constants/theme';
 
 interface MainMenuProps {
   selectedGender: 'male' | 'female';
@@ -12,7 +11,6 @@ const pharmacyBackground = require('@/assets/images/homescreen.png');
 
 export default function MainMenu({ selectedGender, onNewGame, onLoadGame, onBack }: MainMenuProps) {
   const colorScheme = useColorScheme();
-  const colors = Colors[colorScheme === 'dark' ? 'dark' : 'light'];
 
   return (
     <View style={styles.container}>
@@ -95,7 +93,6 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
     paddingVertical: 32,
     alignItems: 'center',
-    gap: 20,
     position: 'absolute',
     zIndex: 5,
     width: '100%',
@@ -106,7 +103,7 @@ const styles = StyleSheet.create({
     fontWeight: '700',
     fontFamily: 'Poppins-Bold',
     textAlign: 'center',
-    marginBottom: 16,
+    marginBottom: 20,
     color: '#FFFFFF',
     textShadowColor: 'rgba(0, 0, 0, 0.3)',
     textShadowOffset: { width: 0, height: 1 },
@@ -114,7 +111,6 @@ const styles = StyleSheet.create({
   },
   buttonsRow: {
     flexDirection: 'column',
-    gap: 20,
     width: '100%',
     maxWidth: 220,
   },
@@ -125,6 +121,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     borderWidth: 3,
+    marginVertical: 10,
     shadowColor: '#8B5CF6',
     shadowOffset: { width: 0, height: 0 },
     shadowOpacity: 0.8,

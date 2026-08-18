@@ -29,20 +29,27 @@ export default function WelcomeSplash({ onContinue }: WelcomeSplashProps) {
   useEffect(() => {
     // Trigger bounce animation after 5 seconds (when audio starts)
     const animationTimer = setTimeout(() => {
-      RNAnimated.parallel([
-        RNAnimated.spring(scaleAnim, {
-          toValue: 1,
-          useNativeDriver: false,
-          speed: 12,
-          bounciness: 8,
-        }),
-        RNAnimated.spring(opacityAnim, {
-          toValue: 1,
-          useNativeDriver: false,
-          speed: 12,
-          bounciness: 8,
-        }),
-      ]).start();
+      try {
+        RNAnimated.parallel([
+          RNAnimated.spring(scaleAnim, {
+            toValue: 1,
+            useNativeDriver: false,
+            speed: 12,
+            bounciness: 8,
+          }),
+          RNAnimated.spring(opacityAnim, {
+            toValue: 1,
+            useNativeDriver: false,
+            speed: 12,
+            bounciness: 8,
+          }),
+        ]).start();
+      } catch (error) {
+        console.error('Error starting animation:', error);
+        // Set values directly if animation fails
+        scaleAnim.setValue(1);
+        opacityAnim.setValue(1);
+      }
     }, 5000);
     return () => clearTimeout(animationTimer);
   }, [scaleAnim, opacityAnim]);
@@ -59,27 +66,31 @@ export default function WelcomeSplash({ onContinue }: WelcomeSplashProps) {
         console.log('Audio loaded successfully');
       } catch (error) {
         console.error('Error loading audio:', error);
+        // Don't crash the app if audio fails to load
+        soundRef.current = null;
       }
     };
-    loadAudio();
+    
+    loadAudio().catch((error) => {
+      console.error('Failed to load audio:', error);
+    });
 
     return () => {
       if (soundRef.current) {
-        soundRef.current.unloadAsync();
+        soundRef.current.unloadAsync().catch(() => {
+          // Ignore errors during cleanup
+        });
       }
     };
   }, []);
 
   useEffect(() => {
     // Play audio after animation completes (animation starts at 5s and takes ~600ms)
-    const audioTimer = setTimeout(async () => {
+    const audioTimer = setTimeout(() => {
       if (soundRef.current) {
-        try {
-          await soundRef.current.playAsync();
-          console.log('Audio playing');
-        } catch (error) {
+        soundRef.current.playAsync().catch((error: any) => {
           console.error('Error playing audio:', error);
-        }
+        });
       }
     }, 5600);
     return () => clearTimeout(audioTimer);
@@ -108,7 +119,11 @@ export default function WelcomeSplash({ onContinue }: WelcomeSplashProps) {
       >
         {/* Character frame */}
         <View style={styles.characterFrame}>
-          <Image source={profNovo} style={styles.characterImage} resizeMode="contain" />
+          {profNovo ? (
+            <Image source={profNovo} style={styles.characterImage} resizeMode="contain" />
+          ) : (
+            <View style={{ width: '100%', height: '100%', backgroundColor: '#8B5CF6', borderRadius: 20 }} />
+          )}
         </View>
 
         {/* Welcome message */}
@@ -181,7 +196,6 @@ const styles = StyleSheet.create({
     paddingVertical: 16,
     justifyContent: 'center',
     alignItems: 'center',
-    gap: 12,
     width: '100%',
   },
 

@@ -5,6 +5,7 @@ import { useColorScheme } from 'react-native';
 import { useEffect, useState } from 'react';
 
 import { AnimatedSplashOverlay } from '@/components/animated-icon';
+import { ErrorBoundary } from '@/components/error-boundary';
 import AppTabs from '@/components/app-tabs';
 
 SplashScreen.preventAutoHideAsync();
@@ -35,15 +36,21 @@ export default function TabLayout() {
         }
       }
     }
-    loadFonts();
+    loadFonts().catch((error) => {
+      console.error('Font loading failed:', error);
+      // Ensure fonts are marked as loaded even if there's an error
+      setFontsLoaded(true);
+    });
   }, []);
 
   if (!fontsLoaded) return null;
 
   return (
-    <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-      <AnimatedSplashOverlay />
-      <AppTabs />
-    </ThemeProvider>
+    <ErrorBoundary>
+      <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
+        <AnimatedSplashOverlay />
+        <AppTabs />
+      </ThemeProvider>
+    </ErrorBoundary>
   );
 }

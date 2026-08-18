@@ -33,14 +33,22 @@ export function AnimatedSplashOverlay() {
     },
   });
 
-  const image = <Image style={styles.image} source={require('@/assets/images/expo-logo.png')} />;
+  let image;
+  try {
+    image = <Image style={styles.image} source={require('@/assets/images/expo-logo.png')} />;
+  } catch (error) {
+    console.error('Error loading splash image:', error);
+    image = <View style={{ width: 100, height: 100, backgroundColor: '#207EEB' }} />;
+  }
 
   return animate ? (
     <Animated.View
       entering={splashKeyframe.duration(DURATION).withCallback((finished) => {
         'worklet';
         if (finished) {
-          scheduleOnRN(setVisible, false);
+          scheduleOnRN(() => {
+            setVisible(false);
+          });
         }
       })}
       style={styles.splashOverlay}>
@@ -49,9 +57,11 @@ export function AnimatedSplashOverlay() {
   ) : (
     <View
       onLayout={() => {
-        SplashScreen.hideAsync().finally(() => {
-          setAnimate(true);
-        });
+        SplashScreen.hideAsync()
+          .catch((error) => console.error('Error hiding splash:', error))
+          .finally(() => {
+            setAnimate(true);
+          });
       }}
       style={styles.splashOverlay}>
       {image}

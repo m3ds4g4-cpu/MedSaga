@@ -167,7 +167,6 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'row',
     justifyContent: 'center',
-    gap: 16,
     alignItems: 'center',
     paddingHorizontal: 12,
     width: '100%',
@@ -179,7 +178,7 @@ const styles = StyleSheet.create({
     padding: 16,
     alignItems: 'center',
     justifyContent: 'center',
-    gap: 10,
+    marginHorizontal: 8,
     shadowColor: '#8B5CF6',
     shadowOffset: { width: 0, height: 0 },
     shadowOpacity: 1,
@@ -196,6 +195,7 @@ const styles = StyleSheet.create({
   characterImage: {
     width: 100,
     height: 100,
+    marginBottom: 10,
   },
   genderText: {
     fontSize: 20,
