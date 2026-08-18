@@ -1,6 +1,5 @@
 import { Tabs } from 'expo-router';
-import { useColorScheme } from 'react-native';
-import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { useColorScheme, Text } from 'react-native';
 
 import { Colors } from '@/constants/theme';
 
@@ -22,14 +21,14 @@ export default function AppTabs() {
         name="index"
         options={{
           title: 'Home',
-          tabBarIcon: ({ color }) => <MaterialCommunityIcons name="home" size={24} color={color} />,
+          tabBarIcon: ({ color }) => <Text style={{ fontSize: 20, color }}>🏠</Text>,
         }}
       />
       <Tabs.Screen
         name="explore"
         options={{
           title: 'Explore',
-          tabBarIcon: ({ color }) => <MaterialCommunityIcons name="compass" size={24} color={color} />,
+          tabBarIcon: ({ color }) => <Text style={{ fontSize: 20, color }}>🧭</Text>,
         }}
       />
     </Tabs>
