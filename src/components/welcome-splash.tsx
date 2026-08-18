@@ -1,8 +1,8 @@
-import { StyleSheet, View, Text, Pressable, useColorScheme, Image, Animated as RNAnimated } from 'react-native';
-import { LinearGradient } from 'expo-linear-gradient';
-import { useEffect, useState, useRef } from 'react';
-import { Audio } from 'expo-av';
 import { Colors } from '@/constants/theme';
+import { Audio } from 'expo-av';
+import { LinearGradient } from 'expo-linear-gradient';
+import { useEffect, useRef, useState } from 'react';
+import { Image, Pressable, Animated as RNAnimated, StyleSheet, Text, useColorScheme, View } from 'react-native';
 
 const profNovo = require('@/assets/images/novo.png');
 
@@ -46,18 +46,20 @@ export default function WelcomeSplash({ onContinue }: WelcomeSplashProps) {
   }, [scaleAnim, opacityAnim]);
 
   useEffect(() => {
+    // TODO: Re-enable audio when crash is fixed
     // Load audio first
     const loadAudio = async () => {
       try {
-        const { sound } = await Audio.Sound.createAsync(
-          require('@/assets/audio/novo-welcome.mp3'),
-          { shouldPlay: false }
-        );
-        soundRef.current = sound;
-        console.log('Audio loaded successfully');
+        // Audio disabled for now - causing native crashes
+        // const { sound } = await Audio.Sound.createAsync(
+        //   require('@/assets/audio/novo-welcome.mp3'),
+        //   { shouldPlay: false }
+        // );
+        // soundRef.current = sound;
+        // console.log('Audio loaded successfully');
+        soundRef.current = null; // Disable audio
       } catch (error) {
         console.error('Error loading audio:', error);
-        // Don't crash the app if audio fails to load
         soundRef.current = null;
       }
     };
@@ -67,24 +69,21 @@ export default function WelcomeSplash({ onContinue }: WelcomeSplashProps) {
     });
 
     return () => {
-      if (soundRef.current) {
-        soundRef.current.unloadAsync().catch(() => {
-          // Ignore errors during cleanup
-        });
-      }
+      // Audio disabled - nothing to clean up
     };
   }, []);
 
   useEffect(() => {
-    // Play audio after animation completes (animation starts at 5s and takes ~600ms)
-    const audioTimer = setTimeout(() => {
-      if (soundRef.current) {
-        soundRef.current.playAsync().catch((error: any) => {
-          console.error('Error playing audio:', error);
-        });
-      }
-    }, 5600);
-    return () => clearTimeout(audioTimer);
+    // Audio disabled - skip playback
+    // const audioTimer = setTimeout(() => {
+    //   if (soundRef.current) {
+    //     soundRef.current.playAsync().catch((error: any) => {
+    //       console.error('Error playing audio:', error);
+    //     });
+    //   }
+    // }, 5600);
+    // return () => clearTimeout(audioTimer);
+  }, []);
   }, []);
 
   return (
