@@ -27,26 +27,17 @@ export default function WelcomeSplash({ onContinue }: WelcomeSplashProps) {
   }, []);
 
   useEffect(() => {
-    // Trigger bounce animation after 5 seconds (when audio starts)
+    // Trigger simple fade animation after 5 seconds (when audio starts)
     const animationTimer = setTimeout(() => {
       try {
-        RNAnimated.parallel([
-          RNAnimated.spring(scaleAnim, {
-            toValue: 1,
-            useNativeDriver: false,
-            speed: 12,
-            bounciness: 8,
-          }),
-          RNAnimated.spring(opacityAnim, {
-            toValue: 1,
-            useNativeDriver: false,
-            speed: 12,
-            bounciness: 8,
-          }),
-        ]).start();
+        RNAnimated.timing(opacityAnim, {
+          toValue: 1,
+          duration: 800,
+          useNativeDriver: false,
+        }).start();
+        scaleAnim.setValue(1); // Instant scale
       } catch (error) {
         console.error('Error starting animation:', error);
-        // Set values directly if animation fails
         scaleAnim.setValue(1);
         opacityAnim.setValue(1);
       }
