@@ -7,15 +7,13 @@ export function AnimatedSplashOverlay() {
 
   useEffect(() => {
     // Hide splash screen after a short delay
-    const timer = setTimeout(async () => {
-      try {
-        await SplashScreen.hideAsync();
-        setVisible(false);
-      } catch (error) {
-        console.error('Error hiding splash:', error);
-        setVisible(false);
-      }
-    }, 500);
+    const timer = setTimeout(() => {
+      setVisible(false);
+      // Try to hide splash screen, but don't crash if it fails
+      SplashScreen.hideAsync().catch(() => {
+        // Ignore errors
+      });
+    }, 300);
 
     return () => clearTimeout(timer);
   }, []);

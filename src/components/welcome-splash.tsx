@@ -1,5 +1,4 @@
 import { Colors } from '@/constants/theme';
-import { Audio } from 'expo-av';
 import { LinearGradient } from 'expo-linear-gradient';
 import { useEffect, useRef, useState } from 'react';
 import { Image, Pressable, Animated as RNAnimated, StyleSheet, Text, useColorScheme, View } from 'react-native';
@@ -14,7 +13,6 @@ export default function WelcomeSplash({ onContinue }: WelcomeSplashProps) {
   const colorScheme = useColorScheme();
   const colors = Colors[colorScheme === 'dark' ? 'dark' : 'light'];
   const [showContent, setShowContent] = useState(false);
-  const soundRef = useRef<any>(null);
   
   // Animation value using React Native's Animated API
   const scaleAnim = useRef(new RNAnimated.Value(0.8)).current;
@@ -46,31 +44,7 @@ export default function WelcomeSplash({ onContinue }: WelcomeSplashProps) {
   }, [scaleAnim, opacityAnim]);
 
   useEffect(() => {
-    // TODO: Re-enable audio when crash is fixed
-    // Load audio first
-    const loadAudio = async () => {
-      try {
-        // Audio disabled for now - causing native crashes
-        // const { sound } = await Audio.Sound.createAsync(
-        //   require('@/assets/audio/novo-welcome.mp3'),
-        //   { shouldPlay: false }
-        // );
-        // soundRef.current = sound;
-        // console.log('Audio loaded successfully');
-        soundRef.current = null; // Disable audio
-      } catch (error) {
-        console.error('Error loading audio:', error);
-        soundRef.current = null;
-      }
-    };
-    
-    loadAudio().catch((error) => {
-      console.error('Failed to load audio:', error);
-    });
-
-    return () => {
-      // Audio disabled - nothing to clean up
-    };
+    // Audio disabled - skip playback
   }, []);
 
   useEffect(() => {
