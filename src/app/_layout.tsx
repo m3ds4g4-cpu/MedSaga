@@ -22,10 +22,17 @@ export default function TabLayout() {
           'Poppins-SemiBold': require('@/assets/fonts/Poppins-SemiBold.ttf'),
         });
         setFontsLoaded(true);
-        await SplashScreen.hideAsync();
       } catch (e) {
-        console.warn(e);
+        console.error('Error loading fonts:', e);
+        // Still mark as loaded to prevent app from hanging
         setFontsLoaded(true);
+      } finally {
+        // Always hide splash screen, even if fonts fail to load
+        try {
+          await SplashScreen.hideAsync();
+        } catch (error) {
+          console.error('Error hiding splash screen:', error);
+        }
       }
     }
     loadFonts();
