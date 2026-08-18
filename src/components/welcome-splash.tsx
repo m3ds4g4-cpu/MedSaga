@@ -75,15 +75,6 @@ export default function WelcomeSplash({ onContinue }: WelcomeSplashProps) {
 
   useEffect(() => {
     // Audio disabled - skip playback
-    // const audioTimer = setTimeout(() => {
-    //   if (soundRef.current) {
-    //     soundRef.current.playAsync().catch((error: any) => {
-    //       console.error('Error playing audio:', error);
-    //     });
-    //   }
-    // }, 5600);
-    // return () => clearTimeout(audioTimer);
-  }, []);
   }, []);
 
   return (
