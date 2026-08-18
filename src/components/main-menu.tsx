@@ -1,4 +1,4 @@
-import { StyleSheet, View, Text, Pressable, useColorScheme, ImageBackground } from 'react-native';
+import { ImageBackground, Pressable, StyleSheet, Text, useColorScheme, View } from 'react-native';
 
 interface MainMenuProps {
   selectedGender: 'male' | 'female';

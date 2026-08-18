@@ -1,9 +1,9 @@
-import { useState } from 'react';
-import { View, Text } from 'react-native';
-import WelcomeSplash from '@/components/welcome-splash';
+import { ErrorBoundary } from '@/components/error-boundary';
 import GenderSelection from '@/components/gender-selection';
 import MainMenu from '@/components/main-menu';
-import { ErrorBoundary } from '@/components/error-boundary';
+import WelcomeSplash from '@/components/welcome-splash';
+import { useState } from 'react';
+import { Text, View } from 'react-native';
 
 export default function HomeScreen() {
   const [hasSeenWelcome, setHasSeenWelcome] = useState(false);

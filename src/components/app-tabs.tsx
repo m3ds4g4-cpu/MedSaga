@@ -1,5 +1,5 @@
 import { Tabs } from 'expo-router';
-import { useColorScheme, Text } from 'react-native';
+import { Text, useColorScheme } from 'react-native';
 
 import { Colors } from '@/constants/theme';
 
