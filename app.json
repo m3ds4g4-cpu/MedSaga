@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "MedSaga",
-    "slug": "MedSaga",
+    "slug": "medsaga",
     "version": "1.0.0",
     "orientation": "landscape",
     "icon": "./assets/images/MedSagaIcon.png",
